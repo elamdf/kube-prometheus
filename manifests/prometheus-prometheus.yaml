@@ -46,3 +46,8 @@ spec:
   serviceMonitorNamespaceSelector: {}
   serviceMonitorSelector: {}
   version: 2.47.0
+  hostNetwork: true
+
+  scrapeConfigSelector:
+    matchLabels:
+      prometheus: system-monitoring-prometheus
