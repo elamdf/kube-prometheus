@@ -1,5 +1,5 @@
-#./node_exporter &
-#gnmic --config gnmic-config.yml  --log subscribe & 
+./node_exporter &
+gnmic --config gnmic-config.yml  --log subscribe & 
 kubectl delete --ignore-not-found=true -f manifests/ -f manifests/setup
 set -e
 kubectl apply --server-side -f manifests/setup
@@ -8,7 +8,6 @@ kubectl wait \
 	--all CustomResourceDefinition \
 	--namespace=monitoring
 kubectl apply -f manifests/
-#kubectl apply -n istio-system -f ~/istio-1.15.0/samples/addons/extras/prometheus-operator.yaml
 set +e
 kubectl create clusterrolebinding adefault-admin --clusterrole cluster-admin --serviceaccount=monitoring:prometheus-k8s
 set -e
