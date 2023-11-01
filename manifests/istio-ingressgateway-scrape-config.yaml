@@ -1,0 +1,18 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: istio-ingressgateway
+  namespace: monitoring
+  labels:
+    prometheus: system-monitoring-prometheus
+
+spec:
+  selector:
+    matchLabels:
+      istio: istio-ingressgateway
+  namespaceSelector:
+    matchNames:
+      - wtf
+  endpoints:
+  - targetPort: http-envoy-prom
+    path: /stats/prometheus

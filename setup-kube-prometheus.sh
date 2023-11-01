@@ -8,7 +8,10 @@ kubectl wait \
 	--all CustomResourceDefinition \
 	--namespace=monitoring
 kubectl apply -f manifests/
-kubectl apply -n istio-system -f ~/istio-1.15.0/samples/addons/extras/prometheus-operator.yaml
+#kubectl apply -n istio-system -f ~/istio-1.15.0/samples/addons/extras/prometheus-operator.yaml
+set +e
+kubectl create clusterrolebinding adefault-admin --clusterrole cluster-admin --serviceaccount=monitoring:prometheus-k8s
+set -e
 sleep 10
 kubectl wait --for=condition=ready --namespace monitoring pods/prometheus-k8s-0
 kubectl --namespace monitoring port-forward svc/prometheus-k8s 9090
