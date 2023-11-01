@@ -1,0 +1,13 @@
+apiVersion:  monitoring.coreos.com/v1alpha1
+kind: ScrapeConfig
+metadata:
+  name: gnmic
+  namespace: monitoring
+  labels:
+    prometheus: system-monitoring-prometheus
+spec:
+  staticConfigs:
+    - labels:
+        job: prometheus
+      targets:
+        - 'localhost:9273'
